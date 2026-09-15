@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AtlasOne — Academic planning with a clearer path · Luis Hernandez Sanchez
+    </title>
+    <meta
+      name="description"
+      content="Explore AtlasOne, Luis Hernandez Sanchez’s academic-planning prototype. Try an interactive prerequisite planner and see how students, counselors, and families connect."
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="projects.css" />
+    <script src="script.js" defer></script>
+    <script src="media.js" defer></script>
+    <script src="projects.js" defer></script>
+  </head>
+  <body id="top" class="project-page atlas-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a
+          class="wordmark"
+          href="index.html"
+          aria-label="Luis Hernandez Sanchez, home"
+          ><span class="monogram" aria-hidden="true">LH<span>.</span></span
+          ><span>Luis Hernandez Sanchez</span></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-controls="site-nav"
+          aria-expanded="false"
+          hidden
+        >
+          Menu <span aria-hidden="true">☰</span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+          <a href="index.html#work">All work</a><a href="step.html">STEP</a
+          ><a href="atlasone.html" aria-current="page">AtlasOne</a
+          ><a class="nav-contact" href="index.html#contact">Let’s connect ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <!-- 1. INTRODUCTION — the repository's current high-school planning focus. -->
+      <section class="case-hero container">
+        <a class="back-link" href="index.html#work">← Back to selected work</a>
+        <div class="case-hero-grid">
+          <div>
+            <p class="eyebrow">AtlasOne / Education &amp; opportunity</p>
+            <h1>Make the next step<br /><span>easier to see.</span></h1>
+            <p class="case-lead">
+              Academic planning shouldn’t require knowing the system already.
+              AtlasOne helps high school students understand their progress,
+              explore course requests, and bring their families into the
+              conversation.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#planner"
+                >Try the planning story ↓</a
+              ><a class="text-link" href="https://github.com/luis10171/AtlasOne"
+                >Explore the code ↗</a
+              >
+            </div>
+          </div>
+          <aside class="project-facts">
+            <p class="eyebrow">One shared picture</p>
+            <dl>
+              <div>
+                <dt>Built with</dt>
+                <dd>Python · Django · HTML/CSS</dd>
+              </div>
+              <div>
+                <dt>Academic decisions</dt>
+                <dd>Explicit rules and prerequisite checks</dd>
+              </div>
+              <div>
+                <dt>Optional assistance</dt>
+                <dd>Gemini explanations, translation, and parent read-aloud</dd>
+              </div>
+            </dl>
+            <p class="award-note">
+              $1,000 competition award<br /><span
+                >Technical implementation &amp; educational impact</span
+              >
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 2. INTERACTIVE PLANNER — simplified fictional example, not the Django app. -->
+      <section
+        class="demo-section"
+        id="planner"
+        aria-labelledby="planner-heading"
+      >
+        <div class="container section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">01 / A student’s next step</p>
+              <h2 id="planner-heading">A plan that responds to progress.</h2>
+            </div>
+            <p>Change one course. Watch the next choice change.</p>
+          </div>
+          <p class="demo-disclosure">
+            Interactive illustration · A fictional transcript and simplified
+            rules. Changes stay on this page; no account or API key is used.
+          </p>
+          <noscript
+            ><p class="demo-disclosure">
+              Enable JavaScript to change this example. Geometry in progress
+              earns no completed credit; Algebra II is conditional on passing
+              it.
+            </p></noscript
+          >
+          <div class="planner-demo" id="planner-demo">
+            <div class="planner-toolbar">
+              <div>
+                <span class="demo-app-name">AtlasOne<span>.</span></span>
+                <p>Avery’s planning story · Grade 10 · Fictional student</p>
+              </div>
+              <button type="button" class="text-button" id="reset-planner">
+                Reset example ↺
+              </button>
+            </div>
+            <div class="planner-body">
+              <div class="transcript-control">
+                <p class="eyebrow">Start with the record</p>
+                <h3>How did Geometry go?</h3>
+                <label for="geometry-status">Geometry status</label
+                ><select id="geometry-status">
+                  <option value="progress">In progress</option>
+                  <option value="passed">Passed · 1 credit earned</option>
+                  <option value="failed">Not passed · 0 credits</option>
+                </select>
+                <div class="transcript-rows">
+                  <div><span>Algebra I</span><b>Passed · 1 credit</b></div>
+                  <div><span>Biology</span><b>Passed · 1 credit</b></div>
+                  <div>
+                    <span>Geometry</span
+                    ><b id="geometry-transcript">In progress · 0 credits</b>
+                  </div>
+                </div>
+                <p class="fine-print">
+                  The project counts a course as passed with a grade of at least
+                  60 and positive earned credits. In-progress work does not
+                  inflate completion.
+                </p>
+              </div>
+              <div class="planning-map">
+                <div class="progress-summary">
+                  <div>
+                    <p class="eyebrow">Example math requirement</p>
+                    <p>
+                      <strong id="math-credit-count">1</strong> of 3 credits
+                      earned
+                    </p>
+                  </div>
+                  <div
+                    class="credit-ring"
+                    id="credit-ring"
+                    role="img"
+                    aria-label="1 of 3 example math credits earned"
+                  >
+                    <span id="credit-percentage">33%</span>
+                  </div>
+                </div>
+                <div
+                  class="course-path"
+                  aria-label="Math prerequisite sequence"
+                >
+                  <div class="course-node completed">
+                    <span>Completed</span><strong>Algebra I</strong>
+                  </div>
+                  <span class="path-arrow" aria-hidden="true">→</span>
+                  <div class="course-node current" id="geometry-node">
+                    <span>In progress</span><strong>Geometry</strong>
+                  </div>
+                  <span class="path-arrow" aria-hidden="true">→</span>
+                  <div class="course-node conditional" id="algebra-node">
+                    <span>Conditional</span><strong>Algebra II</strong>
+                  </div>
+                </div>
+                <p
+                  class="rule-explanation"
+                  id="rule-explanation"
+                  aria-live="polite"
+                >
+                  Algebra II can be requested for next year, conditional on
+                  passing Geometry. Geometry has not earned credit yet.
+                </p>
+                <div class="year-track">
+                  <span><small>GRADE 9</small>Foundations</span
+                  ><span class="is-current"
+                    ><small>GRADE 10</small>Current courses</span
+                  ><span><small>GRADE 11</small>Next-year requests</span
+                  ><span><small>GRADE 12</small>Remaining goals</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="role-controls"
+              role="group"
+              aria-label="Explore a perspective"
+            >
+              <button
+                type="button"
+                data-role-view="student"
+                aria-pressed="true"
+              >
+                01 / Student</button
+              ><button
+                type="button"
+                data-role-view="counselor"
+                aria-pressed="false"
+              >
+                02 / Counselor</button
+              ><button
+                type="button"
+                data-role-view="family"
+                aria-pressed="false"
+              >
+                03 / Family
+              </button>
+            </div>
+            <div class="role-panel" data-role-panel="student">
+              <div>
+                <p class="eyebrow">Make an informed request</p>
+                <h3>Which class comes next?</h3>
+                <p>
+                  A course request starts a conversation with a counselor. It is
+                  not an enrollment or a final schedule.
+                </p>
+              </div>
+              <div class="request-options">
+                <div>
+                  <div>
+                    <h4>Algebra II</h4>
+                    <p id="algebra-eligibility">
+                      Conditional on passing Geometry
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    class="button button-primary"
+                    id="request-algebra"
+                  >
+                    Request Algebra II
+                  </button>
+                </div>
+                <div>
+                  <div>
+                    <h4>Chemistry</h4>
+                    <p>Ready to request · Biology completed</p>
+                  </div>
+                  <button
+                    type="button"
+                    class="button button-outline"
+                    id="request-chemistry"
+                  >
+                    Request Chemistry
+                  </button>
+                </div>
+                <p
+                  id="request-feedback"
+                  class="interaction-feedback"
+                  role="status"
+                ></p>
+              </div>
+            </div>
+            <div class="role-panel" data-role-panel="counselor" hidden>
+              <div>
+                <p class="eyebrow">Keep a person in the loop</p>
+                <h3>The request becomes a conversation.</h3>
+                <p>
+                  In the actual app, counselors review requests, maintain
+                  transcripts, and message students and linked families.
+                </p>
+              </div>
+              <div>
+                <h4>Requests in this example</h4>
+                <ul class="request-list" id="counselor-requests">
+                  <li>
+                    No requests yet. Try requesting a class from the Student
+                    view.
+                  </li>
+                </ul>
+                <p class="fine-print">
+                  This illustration shows pending requests only. The full app
+                  scopes counselor access by district or assignment.
+                </p>
+              </div>
+            </div>
+            <div class="role-panel" data-role-panel="family" hidden>
+              <div>
+                <p class="eyebrow">Make the plan understandable</p>
+                <h3>A shared starting point.</h3>
+                <p>
+                  Parents see explicitly linked students. Plain-language
+                  explanations help make credits and prerequisites part of a
+                  useful conversation.
+                </p>
+                <label for="family-language">Example explanation</label
+                ><select id="family-language">
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                </select>
+              </div>
+              <div class="family-explanation">
+                <p class="eyebrow">Avery’s progress, explained</p>
+                <p id="family-summary" lang="en">
+                  Avery has earned 1 of the 3 math credits in this example.
+                  Geometry is still in progress. Algebra II can be requested for
+                  next year if Geometry is passed.
+                </p>
+                <p class="fine-print">
+                  Preset English and Spanish text for this illustration. In the
+                  full project, broader conversational translation and parent
+                  read-aloud use optional Gemini services.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. ARCHITECTURE & PURPOSE -->
+      <section class="section container" aria-labelledby="architecture-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / The thinking behind it</p>
+            <h2 id="architecture-heading">
+              Rules first. Clarity alongside them.
+            </h2>
+          </div>
+        </div>
+        <div
+          class="architecture-flow"
+          aria-label="AtlasOne application architecture"
+        >
+          <div>
+            <span>01 / Input</span>
+            <h3>Student record</h3>
+            <p>
+              Coursework, earned credits, district requirements, and
+              prerequisites.
+            </p>
+          </div>
+          <div>
+            <span>02 / Deterministic logic</span>
+            <h3>Academic rules</h3>
+            <p>
+              Python calculates progress and checks the conditions for course
+              requests.
+            </p>
+          </div>
+          <div>
+            <span>03 / Optional assistance</span>
+            <h3>Understand the plan</h3>
+            <p>
+              Gemini explains academic context; it does not decide earned
+              credits or eligibility.
+            </p>
+          </div>
+        </div>
+        <div class="evidence-grid">
+          <article>
+            <p class="eyebrow">The engineering</p>
+            <h3>Connected workflows.</h3>
+            <p>
+              I built relational data models, Django authentication and
+              validation, personalized dashboards, and a PDF transcript parser.
+              The current parser proposes rows for counselor review from a
+              supported table layout.
+            </p>
+            <p>
+              The application connects student requests, counselor review, and
+              family-facing explanations through scoped access to academic
+              records.
+            </p>
+          </article>
+          <article>
+            <p class="eyebrow">The purpose</p>
+            <h3>Guidance that more families can use.</h3>
+            <p>
+              AtlasOne is designed with lower-income communities and families
+              navigating unfamiliar school systems in mind. Clear progress,
+              explanations of school terminology, and optional translation can
+              create a better starting point for asking for help.
+            </p>
+            <p>
+              These are design goals. Usability, language quality, and
+              educational outcomes still need evaluation with students,
+              families, and schools.
+            </p>
+          </article>
+        </div>
+        <details class="technical-note">
+          <summary>What works locally, and what uses AI?</summary>
+          <p>
+            Graduation calculations, prerequisite checks, and rule-based
+            summaries run without an API key. The local fallback has limited
+            preset translations. Gemini adds conversational explanations,
+            requested-language support, and optional parent text-to-speech when
+            configured in the Django application. The portfolio demonstration
+            above uses neither Gemini nor a school database.
+          </p>
+          <p>
+            Graduation feasibility is a heuristic estimate, not an optimal
+            timetable solver. Final academic decisions belong with the school.
+          </p>
+          <a
+            href="https://github.com/luis10171/AtlasOne/blob/main/docs/architecture.md"
+            >Architecture and tradeoffs ↗</a
+          ><a
+            href="https://github.com/luis10171/AtlasOne/blob/main/Pathway/services/academic_policy.py"
+            >Academic policy implementation ↗</a
+          >
+        </details>
+      </section>
+
+      <!-- 4. REAL APPLICATION SCREENSHOTS — click any image to enlarge. -->
+      <section
+        class="gallery-section"
+        id="gallery"
+        aria-labelledby="gallery-heading"
+      >
+        <div class="container section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">03 / Inside the application</p>
+              <h2 id="gallery-heading">One plan. More perspectives.</h2>
+            </div>
+            <p>Real application screens with fictional demo records.</p>
+          </div>
+          <div class="gallery-grid atlas-gallery">
+            <figure class="gallery-item gallery-featured">
+              <a
+                class="photo-link screenshot-frame"
+                href="assets/atlas-student-dashboard.png"
+                data-gallery="atlas"
+                aria-label="Enlarge student dashboard"
+                ><img
+                  src="assets/atlas-student-dashboard.png"
+                  alt="AtlasOne student dashboard showing fictional Avery’s graduation progress and transcript"
+                  width="1265"
+                  height="713"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <span>01 / The student dashboard</span>
+                <p>A clearer view of progress and possible next steps.</p>
+              </figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <a
+                class="photo-link screenshot-frame"
+                href="assets/atlas-planner.png"
+                data-gallery="atlas"
+                aria-label="Enlarge course planner"
+                ><img
+                  src="assets/atlas-planner.png"
+                  alt="AtlasOne next-year course planner with prerequisite-aware course requests"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <span>02 / The planner</span>
+                <p>Understand the requirements behind each choice.</p>
+              </figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <a
+                class="photo-link screenshot-frame"
+                href="assets/atlas-counselor-dashboard.png"
+                data-gallery="atlas"
+                aria-label="Enlarge counselor dashboard"
+                ><img
+                  src="assets/atlas-counselor-dashboard.png"
+                  alt="AtlasOne counselor dashboard showing fictional student records and requests"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <span>03 / The counselor</span>
+                <p>Keep requests and student context together.</p>
+              </figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <a
+                class="photo-link screenshot-frame"
+                href="assets/atlas-parent-dashboard.png"
+                data-gallery="atlas"
+                aria-label="Enlarge parent dashboard"
+                ><img
+                  src="assets/atlas-parent-dashboard.png"
+                  alt="AtlasOne parent dashboard with explicitly linked fictional student progress"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <span>04 / The family</span>
+                <p>Bring parents and guardians into the conversation.</p>
+              </figcaption>
+            </figure>
+            
+          </div>
+          <p class="source-note">
+            Features, architecture, and application screenshots:
+            <a href="https://github.com/luis10171/AtlasOne"
+              >AtlasOne repository</a
+            >, reviewed September 15, 2026. The interactive planner is a
+            simplified illustration; it does not reproduce the full graduation
+            estimator.
+          </p>
+        </div>
+      </section>
+      <div class="container next-project">
+        <span>Explore another project</span
+        ><a href="step.html">STEP <span aria-hidden="true">→</span></a>
+      </div>
+    </main>
+    <footer class="site-footer container">
+      <span>© <span id="year">2026</span> Luis Hernandez Sanchez</span
+      ><a href="index.html#contact">Let’s connect ↗</a
+      ><a href="#top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>

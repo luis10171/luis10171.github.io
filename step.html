@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STEP — Face-assisted record lookup · Luis Hernandez Sanchez</title>
+    <meta
+      name="description"
+      content="Explore Luis Hernandez Sanchez’s STEP science-fair project: offline face-assisted record lookup, an interactive recognition walkthrough, and the thinking behind accessible technology."
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="projects.css" />
+    <script src="script.js" defer></script>
+    <script src="media.js" defer></script>
+    <script src="projects.js" defer></script>
+  </head>
+  <body id="top" class="project-page step-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a
+          class="wordmark"
+          href="index.html"
+          aria-label="Luis Hernandez Sanchez, home"
+          ><span class="monogram" aria-hidden="true">LH<span>.</span></span
+          ><span>Luis Hernandez Sanchez</span></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-controls="site-nav"
+          aria-expanded="false"
+          hidden
+        >
+          Menu <span aria-hidden="true">☰</span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+          <a href="index.html#work">All work</a
+          ><a href="step.html" aria-current="page">STEP</a
+          ><a href="atlasone.html">AtlasOne</a
+          ><a class="nav-contact" href="index.html#contact">Let’s connect ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <!-- 1. PROJECT INTRODUCTION — current implementation, with historical results below. -->
+      <section class="case-hero container">
+        <a class="back-link" href="index.html#work">← Back to selected work</a>
+        <div class="case-hero-grid">
+          <div>
+            <p class="eyebrow">STEP / Computer vision for access</p>
+            <h1>
+              A familiar face.<br /><span>A path to the right record.</span>
+            </h1>
+            <p class="case-lead">
+              What if finding a patient’s information didn’t depend on a
+              reliable internet connection? STEP explores face-assisted record
+              lookup on a local computer.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#walkthrough"
+                >See how it works ↓</a
+              ><a
+                class="text-link"
+                href="https://github.com/luis10171/STEP-Facial-Recognition"
+                >Explore the code ↗</a
+              >
+            </div>
+          </div>
+          <aside class="project-facts">
+            <p class="eyebrow">Built with purpose</p>
+            <dl>
+              <div>
+                <dt>Recognition</dt>
+                <dd>OpenCV · YuNet · SFace</dd>
+              </div>
+              <div>
+                <dt>Application</dt>
+                <dd>Python · PySimpleGUI · SQLite</dd>
+              </div>
+              <div>
+                <dt>Design goal</dt>
+                <dd>Local processing. Fewer dependencies on connectivity.</dd>
+              </div>
+            </dl>
+            <p class="award-note">
+              1st place statewide<br /><span
+                >New York STEP Science Fair · original project</span
+              >
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 2. INTERACTIVE WALKTHROUGH — synthetic values; never uses a camera. -->
+      <section
+        class="demo-section"
+        id="walkthrough"
+        aria-labelledby="walkthrough-heading"
+      >
+        <div class="container section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">01 / Under the hood</p>
+              <h2 id="walkthrough-heading">From pixels to a candidate.</h2>
+            </div>
+            <p>Follow one capture through the current pipeline.</p>
+          </div>
+          <p class="demo-disclosure">
+            Interactive illustration · Fictional data. This page explains the
+            process; it does not identify faces or access your camera.
+          </p>
+          <noscript
+            ><p class="demo-disclosure">
+              Enable JavaScript to step through the illustration. The full
+              process is described below.
+            </p></noscript
+          >
+          <div
+            class="pipeline-controls"
+            role="group"
+            aria-label="Recognition walkthrough steps"
+          >
+            <button type="button" data-step="0" aria-pressed="true">
+              <span>01</span>Capture
+            </button>
+            <button type="button" data-step="1" aria-pressed="false">
+              <span>02</span>Detect &amp; align
+            </button>
+            <button type="button" data-step="2" aria-pressed="false">
+              <span>03</span>Encode
+            </button>
+            <button type="button" data-step="3" aria-pressed="false">
+              <span>04</span>Compare
+            </button>
+            <button type="button" data-step="4" aria-pressed="false">
+              <span>05</span>Review
+            </button>
+          </div>
+          <div class="pipeline-stage">
+            <div
+              class="pipeline-visual"
+              aria-label="Diagram of the selected processing stage"
+            >
+              <div data-stage-visual="0" class="capture-diagram">
+                <span class="diagram-label">INPUT / ON THIS DEVICE</span>
+                <div class="frame-diagram">
+                  <span class="frame-corner top-left"></span
+                  ><span class="frame-corner bottom-right"></span
+                  ><span class="capture-symbol" aria-hidden="true">[ A ]</span
+                  ><span>One fictional capture</span>
+                </div>
+                <div class="diagram-chips">
+                  <span>Webcam frame</span><span>or selected photo</span>
+                </div>
+              </div>
+              <div data-stage-visual="1" class="alignment-diagram" hidden>
+                <span class="diagram-label">YUNET / FACE LANDMARKS</span>
+                <div class="alignment-flow">
+                  <div
+                    class="landmark-map"
+                    aria-label="Schematic face landmarks"
+                  >
+                    <i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                  <span aria-hidden="true">→</span>
+                  <div class="aligned-tile">Aligned<br />face crop</div>
+                </div>
+                <p>Locate → align → crop</p>
+              </div>
+              <div data-stage-visual="2" class="encoding-diagram" hidden>
+                <span class="diagram-label"
+                  >SFACE / NUMERICAL REPRESENTATION</span
+                >
+                <div
+                  class="embedding-grid"
+                  aria-label="Illustration of a 128-value embedding"
+                ></div>
+                <p><strong>128 values</strong> · A learned face template</p>
+                <small
+                  >Illustrative colors, not an actual biometric template.</small
+                >
+              </div>
+              <div data-stage-visual="3" class="comparison-diagram" hidden>
+                <span class="diagram-label"
+                  >COSINE SIMILARITY / SYNTHETIC SCORES</span
+                >
+                <div class="mini-match">
+                  <span>Record A</span>
+                  <div><i style="width: 78%"></i></div>
+                  <strong>0.780</strong>
+                </div>
+                <div class="mini-match">
+                  <span>Record B</span>
+                  <div><i style="width: 51%"></i></div>
+                  <strong>0.510</strong>
+                </div>
+                <div class="mini-match">
+                  <span>Record C</span>
+                  <div><i style="width: 22%"></i></div>
+                  <strong>0.220</strong>
+                </div>
+                <p>Highest score → threshold check</p>
+              </div>
+              <div data-stage-visual="4" class="review-diagram" hidden>
+                <span class="diagram-label">CANDIDATE / HUMAN REVIEW</span>
+                <div class="record-preview">
+                  <span class="record-avatar" aria-hidden="true">A</span>
+                  <div>
+                    <small>FICTIONAL RECORD</small>
+                    <h3>Candidate A</h3>
+                    <p>Linked by unique patient ID</p>
+                  </div>
+                </div>
+                <div class="review-stamp">Operator checks the candidate</div>
+                <p>A possible match is not a verified identity.</p>
+              </div>
+            </div>
+            <div class="pipeline-explanation">
+              <p class="eyebrow" id="stage-counter">Step 01 of 05</p>
+              <div aria-live="polite" aria-atomic="true">
+                <h3 id="stage-title">Start with a capture.</h3>
+                <p id="stage-description">
+                  The desktop app accepts a webcam frame or an existing photo.
+                  Processing happens on the same device. Enrollment requires
+                  exactly one detected face.
+                </p>
+              </div>
+              <p class="stage-note" id="stage-note">
+                The actual app processes captures in memory rather than saving
+                them as photographs.
+              </p>
+              <div class="stage-navigation">
+                <button
+                  type="button"
+                  class="button button-outline"
+                  id="step-back"
+                  disabled
+                >
+                  ← Previous</button
+                ><button
+                  type="button"
+                  class="button button-primary"
+                  id="step-next"
+                >
+                  Next step →
+                </button>
+              </div>
+            </div>
+          </div>
+          <details class="technical-note">
+            <summary>Read the complete pipeline and source</summary>
+            <p>
+              YuNet detects the face and landmarks. SFace aligns the crop and
+              produces 128 values. SQLite links that template to patient details
+              by ID. A new capture is compared to stored templates using cosine
+              similarity; the highest score yields a candidate if it meets the
+              threshold. Otherwise the result is unknown. An operator reviews
+              the candidate before opening its record. Direct ID lookup is also
+              available.
+            </p>
+            <a
+              href="https://github.com/luis10171/STEP-Facial-Recognition/blob/main/step/recognition.py"
+              >Recognition implementation ↗</a
+            ><a
+              href="https://github.com/luis10171/STEP-Facial-Recognition/blob/main/step/storage.py"
+              >Storage implementation ↗</a
+            >
+          </details>
+
+          <!-- A real adjustable threshold, with deliberately synthetic scores. -->
+          <div class="threshold-lab" id="threshold-lab">
+            <div>
+              <p class="eyebrow">Try the decision rule</p>
+              <h3>Where does a candidate become “unknown”?</h3>
+              <p>
+                Move the cutoff or change the sample. The same score can produce
+                a different decision.
+              </p>
+              <label for="match-scenario">Example capture</label
+              ><select id="match-scenario">
+                <option value="known">A closer candidate</option>
+                <option value="unknown">No close candidate</option>
+                <option value="empty">No enrolled records</option></select
+              ><label for="match-threshold"
+                >Similarity threshold
+                <output id="threshold-value" for="match-threshold"
+                  >0.363</output
+                ></label
+              ><input
+                id="match-threshold"
+                type="range"
+                min="0"
+                max="1"
+                step="0.001"
+                value="0.363"
+              />
+              <div class="range-labels">
+                <span>0 · more permissive</span><span>1 · stricter</span>
+              </div>
+              <button type="button" class="text-button" id="reset-threshold">
+                Reset to repository default
+              </button>
+            </div>
+            <div class="match-results">
+              <div id="score-bars">
+                <div class="score-row">
+                  <span>Record A</span
+                  ><meter
+                    min="0"
+                    max="1"
+                    value="0.78"
+                    aria-label="Record A similarity"
+                  ></meter
+                  ><output>0.780</output>
+                </div>
+                <div class="score-row">
+                  <span>Record B</span
+                  ><meter
+                    min="0"
+                    max="1"
+                    value="0.51"
+                    aria-label="Record B similarity"
+                  ></meter
+                  ><output>0.510</output>
+                </div>
+                <div class="score-row">
+                  <span>Record C</span
+                  ><meter
+                    min="0"
+                    max="1"
+                    value="0.22"
+                    aria-label="Record C similarity"
+                  ></meter
+                  ><output>0.220</output>
+                </div>
+              </div>
+              <p class="match-decision" id="match-decision" aria-live="polite">
+                Candidate A → operator review
+              </p>
+              <p class="fine-print">
+                These are made-up similarity scores, not confidence percentages.
+                The repository’s default 0.363 threshold has not been calibrated
+                for this application.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. PURPOSE & EVIDENCE — distinguish intended benefits from measured results. -->
+      <section class="section container" aria-labelledby="impact-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / Why it matters</p>
+            <h2 id="impact-heading">Designed around real constraints.</h2>
+          </div>
+        </div>
+        <div class="impact-grid">
+          <div class="impact-intro">
+            <p>
+              In a clinic with limited connectivity or a small technology
+              budget, a cloud-dependent lookup system may be difficult to
+              sustain. My goal is to explore a simpler path to finding
+              information, including in lower-income countries.
+            </p>
+            <p>Choose a constraint to see the design response.</p>
+            <div
+              class="scenario-buttons"
+              role="group"
+              aria-label="Clinic constraints"
+            >
+              <button
+                type="button"
+                data-impact="connectivity"
+                aria-pressed="true"
+              >
+                Unreliable internet</button
+              ><button
+                type="button"
+                data-impact="hardware"
+                aria-pressed="false"
+              >
+                Limited hardware budget</button
+              ><button type="button" data-impact="records" aria-pressed="false">
+                Finding the right record
+              </button>
+            </div>
+          </div>
+          <div class="impact-response" aria-live="polite">
+            <p class="eyebrow">The design response</p>
+            <h3 id="impact-title">Keep the core workflow local.</h3>
+            <p id="impact-description">
+              After installation and model downloads, enrollment, recognition,
+              and record lookup work offline. Losing connectivity does not
+              require sending a new image to a cloud service.
+            </p>
+            <div class="impact-flow">
+              <span>Capture</span><b aria-hidden="true">→</b
+              ><span>Local comparison</span><b aria-hidden="true">→</b
+              ><span>Staff review</span>
+            </div>
+          </div>
+        </div>
+        <div class="evidence-grid">
+          <article>
+            <p class="eyebrow">What I demonstrated</p>
+            <h3>Award-winning original research.</h3>
+            <p>
+              The original face_recognition/dlib version achieved approximately
+              85% identification accuracy in my testing with 25 sample faces,
+              and won first place statewide across all divisions at the New York
+              STEP Science Fair.
+            </p>
+          </article>
+          <article>
+            <p class="eyebrow">What comes next</p>
+            <h3>Validate the potential.</h3>
+            <p>
+              The current OpenCV version has not had a new accuracy evaluation.
+              Faster lookup and more time for care are intended benefits, not
+              measured clinical outcomes. Real-world use would require
+              representative testing, consent, secure storage, access controls,
+              and safeguards against false matches.
+            </p>
+            <p class="fine-print">
+              Educational prototype · not for clinical use or identity
+              verification.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 4. GALLERY — add trophy/presentation filenames in media.js. -->
+      <section
+        class="gallery-section"
+        id="gallery"
+        aria-labelledby="gallery-heading"
+      >
+        <div class="container section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">03 / The project in pictures</p>
+              <h2 id="gallery-heading">From the screen to the science fair.</h2>
+            </div>
+            <p>Select a screenshot to take a closer look.</p>
+          </div>
+          <div class="gallery-grid step-gallery">
+            <figure class="gallery-item gallery-featured">
+              <a
+                class="photo-link screenshot-frame"
+                href="assets/step-demo-home.jpg"
+                data-gallery="step"
+                aria-label="Enlarge STEP application screenshot"
+                ><img
+                  src="assets/step-demo-home.jpg"
+                  alt="STEP desktop application home screen in fictional demo mode"
+                  width="1684"
+                  height="1491"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <span>01 / The application</span>
+                <p>Enrollment, live recognition, and local record lookup.</p>
+              </figcaption>
+            </figure>
+            <figure
+              class="gallery-item"
+              data-photo-slot="stepTrophy"
+              data-gallery-group="step"
+            >
+              <div class="photo-placeholder trophy-placeholder">
+                <span class="eyebrow">The science fair</span
+                ><span class="placeholder-type"
+                  >A moment<br />worth remembering.</span
+                ><span>Trophy photo coming soon</span>
+              </div>
+              <figcaption>
+                <span>02 / The recognition</span>
+                <p>First place · New York STEP Science Fair.</p>
+              </figcaption>
+            </figure>
+            <figure
+              class="gallery-item"
+              data-photo-slot="stepPresentation"
+              data-gallery-group="step"
+            >
+              <div class="photo-placeholder">
+                <span class="eyebrow">Behind the project</span
+                ><span class="placeholder-type">Sharing<br />the idea.</span
+                ><span>Presentation photo coming soon</span>
+              </div>
+              <figcaption>
+                <span>03 / The presentation</span>
+                <p>
+                  A space for the poster, demonstration, or science-fair story.
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+          <p class="source-note">
+            Technical walkthrough and application screenshot:
+            <a href="https://github.com/luis10171/STEP-Facial-Recognition"
+              >STEP repository</a
+            >, reviewed September 15, 2026. Historical award and testing results
+            are from my project history. STEP branding belongs to its respective
+            owner.
+          </p>
+        </div>
+      </section>
+      <div class="container next-project">
+        <span>Next project</span
+        ><a href="atlasone.html">AtlasOne <span aria-hidden="true">→</span></a>
+      </div>
+    </main>
+    <footer class="site-footer container">
+      <span>© <span id="year">2026</span> Luis Hernandez Sanchez</span
+      ><a href="index.html#contact">Let’s connect ↗</a
+      ><a href="#top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>
